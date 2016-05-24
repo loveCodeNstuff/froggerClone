@@ -242,10 +242,9 @@ var Engine = (function(global) {
     }
 })(this);
 
-/* This function does nothing but it could have been a good place to
- * handle game reset states - maybe a new game menu or a game over screen
- * those sorts of things. It's only called once by the init() method.
- */
+// handles restarting the game or starting
+// a new level with more enemies on screen
+// depending on win screen reached or not
 function start() {
   if( player.sprite === 'images/win.jpg' ) {
     // if you win start a new level with more enemies

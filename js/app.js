@@ -1,3 +1,5 @@
+"use strict";
+
 ///////////////////////////////////////////
 //        Enemy  Class                  //
 //////////////////////////////////////////
@@ -34,16 +36,12 @@ Enemy.prototype.getRow = function() {
   switch(row){
     case 1:
       return 70;
-      break;
     case 2:
       return 150;
-      break;
     case 3:
       return 230;
-      break;
     case 4:
       return 310;
-      break;
     default:
       console.log("error in Enemy.getRow()");
       break;
@@ -101,21 +99,6 @@ var scoredArray = [],
         false,
         false
     ];
-
-// figure out whether a spot is taken or not and if it isn't
-// fill it and make sure its locked out to any other sprite
-function getOpenSpots(x) {
-
-  var xPixels = 4;
-
-  for(var z = 0; z < 5; z++ ){
-    if( x === xPixels && openSpots[z] === false ){
-      openSpots[z] = true;
-      return true;
-    }
-    xPixels += 100;
-  }
-};
 
 ///////////////////////////////////////////
 //        Heart   Class                  //
@@ -176,6 +159,21 @@ Player.prototype.getPlayer = function() {
     return this.playerArr[this.playerCount++];
 };
 
+// figure out whether a spot is taken or not and if it isn't
+// fill it and make sure its locked out to any other sprite
+Player.prototype.getOpenSpots = function(x) {
+
+  var xPixels = 4;
+
+  for(var z = 0; z < 5; z++ ){
+    if( x === xPixels && openSpots[z] === false ){
+      openSpots[z] = true;
+      return true;
+    }
+    xPixels += 100;
+  }
+}
+
 // only check this is a sprite is trying to get into a spot
 // if player scores create a new scored class and store info of
 // its location and push into scoredArray then change the sprite
@@ -185,7 +183,7 @@ Player.prototype.update = function(dt) {
 
   if( this.y === -10 ) {
 
-    if( getOpenSpots(player.x) === true ) {
+    if( this.getOpenSpots(player.x) === true ) {
 
       var scored = new Scored( this.sprite, this.x );
       scoredArray.push(scored);
@@ -197,7 +195,7 @@ Player.prototype.update = function(dt) {
       }
 
     }else{
-      player.y += 80;
+      this.y += 80;
     }
   }
 };
@@ -208,7 +206,7 @@ Player.prototype.update = function(dt) {
 // is equal to 6
 Player.prototype.startPoint = function() {
 
-  if( player.playerCount === 6 ){
+  if( this.playerCount === 6 ){
     this.x = 0;
     this.y = 0;
   }else{
@@ -288,7 +286,7 @@ document.addEventListener('keyup', function(e) {
 });
 
 ///////////////////////////////////////////
-//        Levels                        //
+//        Levels    CLass               //
 //////////////////////////////////////////
 var level = 1;
 
@@ -302,4 +300,4 @@ var Font = function() {
   };
 };
 
-font = new Font();
+var font = new Font();
