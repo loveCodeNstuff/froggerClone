@@ -90,15 +90,7 @@ Scored.prototype.render = function() {
 };
 
 // scored sprite array
-var scoredArray = [],
-    // array of open spots if its false then it is open
-    openSpots = [
-        false,
-        false,
-        false,
-        false,
-        false
-    ];
+var scoredArray = [];
 
 ///////////////////////////////////////////
 //        Heart   Class                  //
@@ -146,6 +138,15 @@ var Player = function() {
         'images/lose.jpg'
   ];
 
+  // array of open spots if its false then it is open
+  this.openSpots = [
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
+
   // count of players that made it a open spot
   this.playerCount = 0;
   this.sprite = this.getPlayer();
@@ -166,8 +167,8 @@ Player.prototype.getOpenSpots = function(x) {
   var xPixels = 4;
 
   for(var z = 0; z < 5; z++ ){
-    if( x === xPixels && openSpots[z] === false ){
-      openSpots[z] = true;
+    if( x === xPixels && this.openSpots[z] === false ){
+      this.openSpots[z] = true;
       return true;
     }
     xPixels += 100;

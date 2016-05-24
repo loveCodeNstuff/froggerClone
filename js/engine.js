@@ -263,7 +263,7 @@ function start() {
 }
 
 function reset() {
-  openSpots = [
+  player.openSpots = [
     false,
     false,
     false,
